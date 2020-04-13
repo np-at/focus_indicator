@@ -1,0 +1,15 @@
+{
+
+  "description": "Adds a border around elements on focus",
+  "manifest_version": 2,
+  "name": "focus indicator",
+  "version": "0.1",
+  "homepage_url": "https://github.com/np-at/focus_indicator",
+  "content_scripts": [
+    {
+      "matches": ["*://*"],
+      "js": ["focus_indicator.js"]
+    }
+  ]
+
+}
