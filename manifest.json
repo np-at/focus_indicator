@@ -7,7 +7,7 @@
   "homepage_url": "https://github.com/np-at/focus_indicator",
   "content_scripts": [
     {
-      "matches": ["*://*"],
+      "matches": ["<all_urls>"],
       "js": ["focus_indicator.js"]
     }
   ]

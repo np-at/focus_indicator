@@ -1,27 +1,39 @@
 function focusInHandler(event){
-    Event.element(event).fire("focus:in");
+    let a = event.target;
+    let r = a.parentElement;
+
+    let c;
+    c = window.getComputedStyle(a, null).getPropertyValue("background-color");
+    let parentBackground = window.getComputedStyle(r, null).getPropertyValue("background-color");
+
+       // c = a.style.background;
+        console.log(`${c}`);
+        let f = invertColor(c)
+    a.style.border = `5px ${f} solid`;
 }
 function focusOutHandler(event){
-    Event.element(event).fire("focus:out");
+
+    let a = event.target;
+     a.style.border = "unset";
 }
 
 if (document.addEventListener){
     document.addEventListener("focus", focusInHandler, true);
     document.addEventListener("blur", focusOutHandler, true);
-} else {
-    document.observe("focusin", focusInHandler);
-    document.observe("focusout", focusOutHandler);
 }
 
-document.observe('focus:in', function(event) {
-    let a = event.target;
-    a.style.border = "5px solid yellow";
-    console.log(`focus in for ${event.target}`);
-    //console.log('focus:in');
-});
+function invertColor(rgb, bw=false) {
+    console.log(rgb)
+    let sep = rgb.indexOf(",") > -1 ? "," : " ";
+    // Turn "rgb(r,g,b)" into [r,g,b]
+    rgb = rgb.substr(4).split(")")[0].split(sep);
+    console.log(rgb)
+    let r = (+rgb[0]),
+        g = (+rgb[1]),
+        b = (+rgb[2]);
 
-document.observe('focus:out', function(event) {
-    let a = event.target;
-    a.style.border = "unset";
-    console.log('focus:out');
-});
+    r = (255 - r)
+    g = (255 - g)
+    b = (255 - b)
+    return `rgb(${r}, ${b}, ${g})`
+}
